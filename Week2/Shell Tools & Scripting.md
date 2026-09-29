@@ -86,7 +86,7 @@ if [ $name == "Alice" ]; then ...     # breaks if $name is empty
 | `name=value` | assign shell variable (no spaces around `=`) | `dir=/tmp/work` |
 | `export name` | mark for export | `export PATH` |
 | `export name=value` | assign + export in one step | `export EDITOR=vim` |
-| `NAME=value cmd` | set var for ONE command only | `DEBUG=1 ./script.sh` |
+| `NAME=value cmd` | set var for ONE command only. `value` is the tmp var for cmd to run in child process | `DEBUG=1 ./script.sh` |
 | `env` | list all env vars | `env \| grep PATH` |
 | `${var:-default}` | use default if unset/empty | `name=${1:-world}` |
 
@@ -109,6 +109,8 @@ echo "This folder has $(ls | wc -l) entries"
 | `$PWD` | env var (shell-maintained) | current working directory |
 | `$SHELL` | env var | login shell path |
 | `$?` | special param | exit status of last command (not exported) |
+
+Note that shell-maintained means that the shell actively manages and updates the value of `$PWD` on your behalf as you use the terminal, rather than relying on static information set when your session starts
 
 ## 2.4 Exit Status and Command Chaining
 - Every command returns an **exit status** on exit: `0` = success, non-zero (1–255) = failure (different tools use different codes).
